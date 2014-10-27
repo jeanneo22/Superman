@@ -6,7 +6,7 @@ Dentre as outras funcionalidades propostas por você deve ter armazenado a forç
 ível.
 
 Requisitos funcionais 
-Todos os atributos e funções membros devem estar relacionados à classe
+Todos os atributos e funções membros devem estar relacionados à classe 
 1.	Pelo menos 4 atributos - ok
 2.	Pelo menos 4 funções membros sem incluir get e set - ok
 
