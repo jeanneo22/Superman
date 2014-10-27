@@ -43,7 +43,7 @@ int Data::VerificaDia(int diaTeste) const
         return diaTeste;
     
     cout << "Dia invalido (" << diaTeste << ") configurado para 1.\n";
-    return 1; 
+    return 1;  
 
     
 }

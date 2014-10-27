@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jeanne
-Date                   :=10/10/14
+Date                   :=10/27/14
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=C:/MinGW-4.8.1/bin/g++.exe 
 SharedObjectLinkerName :=C:/MinGW-4.8.1/bin/g++.exe -shared -fPIC
@@ -63,7 +63,7 @@ AS       := C:/MinGW-4.8.1/bin/as.exe
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Superman.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/Superman.cpp$(ObjectSuffix) $(IntermediateDirectory)/Data.cpp$(ObjectSuffix) $(IntermediateDirectory)/Character.cpp$(ObjectSuffix) $(IntermediateDirectory)/Hero.cpp$(ObjectSuffix) 
 
 
 
@@ -113,6 +113,22 @@ $(IntermediateDirectory)/Data.cpp$(DependSuffix): Data.cpp
 
 $(IntermediateDirectory)/Data.cpp$(PreprocessSuffix): Data.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Data.cpp$(PreprocessSuffix) "Data.cpp"
+
+$(IntermediateDirectory)/Character.cpp$(ObjectSuffix): Character.cpp $(IntermediateDirectory)/Character.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Jeanne/MyWorkspaces/Workspace2/Superman/Character.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Character.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Character.cpp$(DependSuffix): Character.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Character.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Character.cpp$(DependSuffix) -MM "Character.cpp"
+
+$(IntermediateDirectory)/Character.cpp$(PreprocessSuffix): Character.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Character.cpp$(PreprocessSuffix) "Character.cpp"
+
+$(IntermediateDirectory)/Hero.cpp$(ObjectSuffix): Hero.cpp $(IntermediateDirectory)/Hero.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Jeanne/MyWorkspaces/Workspace2/Superman/Hero.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Hero.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/Hero.cpp$(DependSuffix): Hero.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Hero.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/Hero.cpp$(DependSuffix) -MM "Hero.cpp"
+
+$(IntermediateDirectory)/Hero.cpp$(PreprocessSuffix): Hero.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Hero.cpp$(PreprocessSuffix) "Hero.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
