@@ -35,4 +35,4 @@ Quarta Atividade
 4.	Usar Protected acessando diretamente os atributos na classe derivada
 5.	Alocação dinâmica de memória na classe base e derivada - ok
 6.	Sobrescrita de método: chamar dentro do método da classe derivada o método correspondente da classe base usando :: - ok
-7.	No main: criar um ponteiro da classe base para alocar memória para a classe derivada e chamar os vários métodos implementados 
+7.	No main: criar um ponteiro da classe base para alocar memória para a classe derivada e chamar os vários métodos implementados - ok
