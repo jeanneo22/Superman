@@ -18,7 +18,7 @@ protected:
 	const static float alturaMaxima;
 public:
 	Character &operator=( const Character & );
-	Character(const string & = "sem nome",const int & = 0,const float & = 0.00,const int & = 1,const int = 1, const int & = 1900);
+	Character(const string & = "sem nome",const int & = 0,const float & = 0.00,const int & = 1,const int & = 1, const int & = 1900);
 	Character(const Character &);
 	virtual ~Character();
 	void setNome(const string &);
@@ -29,8 +29,8 @@ public:
 	float getAltura();
 	void alocarRoupas();
 	void leRoupas();
-	void copiarRoupas(const int *);
+	void copiarRoupas(const string *);
 	void imprimeRoupas();
 	virtual void imprime();
-}
+};
 #endif // CHARACTER_H

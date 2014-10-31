@@ -5,13 +5,14 @@ using std::ostream;
 using std::string;
 using std::endl;
 using std::cout;
+using std::cin;
 
 const float Character::alturaMaxima = 2.30;
 // Sobrecarga do operador << para a classe Character
 ostream &operator<<( ostream &output,const Character &character)
 {
-	output << "Nome: " << character.nome << "Idade: " << character.idade
-	<< "Altura: " << character.altura << endl;
+	output << "\nNome: " << character.nome << "\nIdade: " << character.idade
+	<< "\nAltura: " << character.altura << endl;
 	
 	return output;
 }
@@ -42,90 +43,92 @@ Character::Character(const Character &character)
 	this->nome = character.nome;
 	this->idade = character.idade;
 	this->altura = character.altura;
+	alocarRoupas();
 	copiarRoupas(character.roupas);
 }
 // Destrutor
-Character::virtual ~Character() 
+Character::~Character() 
 {
 	delete []roupas;
 }
-Character::void setNome(const string &nome)
+void Character::setNome(const string &nome)
 {
 	this->nome = nome;
 }
-Character::void setIdade(const int &idade)
+void Character::setIdade(const int &idade)
 {
 	this->idade = (idade>=0)? idade:0;
 }
-Character::void setAltura(const float &altura)
+void Character::setAltura(const float &altura)
 {
 	this->altura = (altura>=0 && altura<=alturaMaxima)? altura:0;
 }
-Character::string getNome() { return (this->nome); }
-Character::int getIdade() { return (this->idade); }
-Character::float getAltura() { return (this->altura); }
+string Character::getNome() { return (this->nome); }
+int Character::getIdade() { return (this->idade); }
+float Character::getAltura() { return (this->altura); }
 /* Aloca um vetor de roupas para Character
  * um Character pode ter no máximo 10 roupas
  * e já começa com 1 camisa, 1 calça e 1 sapato*/
-Character::void alocarRoupas()
+void Character::alocarRoupas()
 {
-	this->roupas[] = new int[10];
-	roupa[0] = "camisa";
-	roupa[1] = "calça";
-	roupa[2] = "sapato";
+	this->roupas = new string[10];
+	this->roupas[0] = "camisa";
+	this->roupas[1] = "calca";
+	this->roupas[2] = "sapato";
 }
 // Coloca mais roupas no vetor de roupas
-Character::void leRoupas()
+void Character::leRoupas()
 {
 	int i = 3;
 	do
 	{
-		int opcao
-		cout << "Selecione as roupas:\n":
+		int opcao;
+		cout << "Selecione as roupas:\n";
 		cout << "1. capa \n";
 		cout << "2. camisa \n";
-		cout << "3. calça \n";
+		cout << "3. calca \n";
 		cout << "4. sapato \n";
 		cin >> opcao;
 		switch (opcao) {
 			case 1:
-				this->roupa[i] = "capa";
-				i++
+				this->roupas[i] = "capa";
+				i++;
 				break;
 			case 2:
-				this->roupa[i] = "camisa";
-				i++
+				this->roupas[i] = "camisa";
+				i++;
 				break;
 			case 3:
-				this->roupa[i] = "calça";
-				i++
+				this->roupas[i] = "calca";
+				i++;
 				break;
 			case 4:
-				this->roupa[i] = "sapato";
-				i++
+				this->roupas[i] = "sapato";
+				i++;
 				break;
 			default:
 				cout << "Voce nao digitou opcao valida\n";
-		}while(i < 10);
-	}
+				break;
+		}
+	}while(i < 10);
 }
 // Método para copias o vetor de roupas 
-Character::void copiarRoupas(const int *roupasOriginal)
+void Character::copiarRoupas(const string *roupasOriginal)
 {
 	for(int i = 0; i < 10; i++)
 	   this->roupas[i] = roupasOriginal[i];
 }
 // Imprime as roupas do Character
-Character::void imprimeRoupas()
+void Character::imprimeRoupas()
 {
 	for(int i = 0; i < 10; i++)
-	   cout << "Roupa: " << roupa[i] << endl;
+	   cout << "Roupa: " << roupas[i] << endl;
 }
 // imprimr dados do Character, função que será sobrescrita pela classe Hero
-Character::virtual void imprime()
+void Character::imprime()
 {
-	cout << "Nome: " << this->nome;
-	cout << "Idade: " << this->idade;
+	cout << "Nome: " << this->nome << endl;
+	cout << "Idade: " << this->idade << endl;
 	cout << "Altura: " << this->altura << endl;
 	imprimeRoupas();
 }
