@@ -1,1 +1,1 @@
-./Debug/main.cpp.o ./Debug/Superman.cpp.o ./Debug/Data.cpp.o   
+./Debug/main.cpp.o ./Debug/Superman.cpp.o ./Debug/Data.cpp.o ./Debug/Character.cpp.o ./Debug/Hero.cpp.o   

@@ -31,7 +31,9 @@ No main: criar um ponteiro da classe base para alocar memória para a classe der
  
 #include <string>
 #include <vector>
+#include "Hero.h"
 using std::string;
+using std::vector;
 using std::ostream;
 
 #ifndef SUPERMAN_H
@@ -39,20 +41,20 @@ using std::ostream;
 
 class Superman : public Hero
 {
-	friend ostream &operator<<( ostream &,const Superman &);
+	friend ostream& operator<<( ostream &,const Superman &);
 private:
 	int resistenciaAtual; // resistencia Atual do Superman
 	int nivelVisaoCalor; // Nivel da visão de calor
 	int visaoRaioX; // Visaõ de RaioX 1-ativada 0-desativada
 	float superForca; // superForca do Superman
 	int *itemForca; // vetor de itens de força 
-	vector <string> planetasVisitados; // guarda planetas visitados pleo Superman
+	vector<string> planetasVisitados; // guarda planetas visitados pelo Superman
 	
 	static int contSuperman;
 	const static float forcaMaxima; // força maxima do superman em quintilhões de toneladas
 public:
 	Superman &operator=( const Superman & );
-	Superman(const string & = "nenhuma",const string & = "sem nome",const int & = 0,const float & = 0.00,const int & = 1,const int = 1, const int & = 1900,const int & = 0,const int & = 0,cons float 0.0);
+	Superman(const string & = "nenhuma",const string & = "sem nome",const int & = 0,const float & = 0.00,const int & = 1,const int & = 1, const int & = 1900,const int & = 0,const int & = 0,const float & = 0.0);
 	Superman(const Superman &);
 	Superman(const int &);
 	~Superman();
@@ -65,7 +67,7 @@ public:
 	int getVisaoRaioX();
 	float getSuperForca();
 	void alocarItemForca();
-	void copiarItemForca(const int *);
+	void copiarItemForca(int *);
 	void lutar();
 	void coletarItem(const int &);
 	void usarItem(const int &);
@@ -78,7 +80,7 @@ public:
 	void mostrarPlanetas();
 	void imprimePlanetasVisitados();
 	void visitarPlaneta();
-	void atualizarPlanetasVisitados();
+	void atualizarPlanetasVisitados(const string &);
 	void imprime();
 	static float getForcaMaxima();
 };

@@ -5,16 +5,17 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::vector;
 using std::string;
 using std::ostream;
 
 int Superman::contSuperman = 0;
 const float Superman::forcaMaxima = 200;
 // Sobecarga do operador << para imprimir um objeto da classe Superman
-ostream &operator<<( ostream &output,const Superman &superman)
+ostream& operator<<( ostream& output,const Superman & superman)
 {
-	output << "\nHeroi: Superman" << "\nNome: " << superman.nome
-	<<  "\nResistencia Atual: " << superman.resistenciaAtual << "\nNivel da visao de calor: " << superman.nivelVisaoCalor 
+	output << "\nHeroi: Superman" << "\nNome: " << superman.nome << "\nIdade: " << superman.idade 
+	<< "\nAltura: " << superman.altura <<  "\nResistencia Atual: " << superman.resistenciaAtual << "\nNivel da visao de calor: " << superman.nivelVisaoCalor 
 	<< "\nVisao de raioX : " << superman.visaoRaioX << "\nSuper Forca: " << superman.superForca << endl;
 	return output;
 }
@@ -27,7 +28,7 @@ Superman &Superman::operator=( const Superman &supermanDireita)
 	fraqueza = supermanDireita.fraqueza;
 	resistenciaAtual = supermanDireita.resistenciaAtual;
 	nivelVisaoCalor = supermanDireita.nivelVisaoCalor;
-	visaoRaioX = supermanDireita.visaoRaioX
+	visaoRaioX = supermanDireita.visaoRaioX;
 	superForca = supermanDireita.superForca;
 	itemForca = new int[5];
 	for(int i = 0; i < 5; i++)
@@ -42,10 +43,10 @@ Superman::Superman(const string &fraqueza,const string &nome,const int &idade,co
 {
 	setResistenciaAtual(resistenciaAtual);
 	setNivelVisaoCalor(nivelVisaoCalor);
-	setVisaoRaioX(false);
+	setVisaoRaioX(0);
 	setSuperForca(superForca);
 	alocarItemForca();
-	contSuperman++:
+	contSuperman++;
 	visitarPlaneta();
 }
 // Construtor de cópia da classe Superman
@@ -55,8 +56,9 @@ Superman::Superman(const Superman &supermanOriginal) : Hero(supermanOriginal)
 	this->nivelVisaoCalor = supermanOriginal.nivelVisaoCalor;
 	this->visaoRaioX = supermanOriginal.visaoRaioX;
 	this->superForca = supermanOriginal.superForca;
-	this->itemForca.copiarItemForca(supermanOriginal.itemForca);
-	this->planetasVisitados(supermanOriginal.planetasVisitados);
+	alocarItemForca();
+	this->copiarItemForca(supermanOriginal.itemForca);
+	this->planetasVisitados = supermanOriginal.planetasVisitados;
 	contSuperman++;
 }
 // Construtor que apenas seta o nível da visão de calor do Superman
@@ -70,62 +72,62 @@ Superman::~Superman()
 {
 	delete []itemForca;
 }
-Superman::void setResistenciaAtual(const int &resistenciaAtual)
+void Superman::setResistenciaAtual(const int &resistenciaAtual)
 {
 	this->resistenciaAtual = (resistenciaAtual>=0)? resistenciaAtual:0;
 }
-Superman::void setNivelVisaoCalor(const int &nivelVisaoCalor)
+void Superman::setNivelVisaoCalor(const int &nivelVisaoCalor)
 {
 	this->nivelVisaoCalor = (nivelVisaoCalor>=0 && nivelVisaoCalor<=5)? nivelVisaoCalor:0;
 }
-Superman::void setVisaoRaioX(int visaoRaioX)
+void Superman::setVisaoRaioX(const int &visaoRaioX)
 {
 	this->visaoRaioX = (visaoRaioX == 1 || visaoRaioX == 0) ? visaoRaioX:0;
 }
-Superman::void setSuperForca(const float &superForca)
+void Superman::setSuperForca(const float &superForca)
 {
 	this->superForca = (superForca >=0 && superForca <= forcaMaxima) ? superForca:0;
 }
 /* Método para alocar so items de forca que o Superman terá
    inicialmente ele tem 3 itens de força e no máximo 5 itens de força 
   */
-Superman::void alocarItemForca()
+void Superman::alocarItemForca()
 {
 	this->itemForca = new int[5];
 	for(int i = 0; i < 3; i++)
 		itemForca[i] = 1;
 }
 // Método para copiar os itens de forca
-Superman::void copiarItemForca(const int *itemForcaOriginal)
+void Superman::copiarItemForca(int *itemForcaOriginal)
 {
 	for(int i = 0; i < 5; i++)
 	   this->itemForca[i] = itemForcaOriginal[i];
 }
-Superman::int getResistenciaAtual() { return (this->resistenciaAtual); }
-Superman::int getNivelVisaoCalor() { return (this->nivelVisaoCalor); }
-Superman::int getVisaoRaioX() { return (this->visaoRaioX); }
-Superman:: float getSuperForca() { return (this->superForca); }
+int Superman::getResistenciaAtual() { return (this->resistenciaAtual); }
+int Superman::getNivelVisaoCalor() { return (this->nivelVisaoCalor); }
+int Superman::getVisaoRaioX() { return (this->visaoRaioX); }
+float Superman::getSuperForca() { return (this->superForca); }
 // Método usado quando o Superman está lutando
-Superman::void lutar()
+void Superman::lutar()
 {
 	if(visaoCalor()) cout << "Usando a visao de calor: " << nivelVisaoCalor << endl;
 	voar(30.0);
 	resistenciaAtual -= 10;
 }
 // Verifica se a visão de calor está ativada em em que nível
-Superman::int visaoCalor() const
+int Superman::visaoCalor() const
 {
 	return(nivelVisaoCalor > 0);
 }
 // Coleta um item de força
-Superman::void coletarItem(const int i)
+void Superman::coletarItem(const int &i)
 {
 	if(i >= 0 && i < 5) itemForca[i] = 1;
 }
 // Usa um item de força
-Superman::void usarItem(const int i)
+void Superman::usarItem(const int &i)
 {	
-	if(itemForca[i])
+	if(i >= 0 && i < 5 && itemForca[i])
 		switch (i) {
 			case 0:
 				aumentaResistencia(10);
@@ -151,38 +153,39 @@ Superman::void usarItem(const int i)
 		}
 	else cout << "Item nao encontrado " << endl;
 }
-Superman::void aumentaResistencia(const int &aumento) 
+void Superman::aumentaResistencia(const int &aumento) 
 {
 	this->resistenciaAtual += (aumento >= 0)? aumento:0;
 }
-Superman::void aumentaNivelVisaoCalor(const int &aumento)
+void Superman::aumentaNivelVisaoCalor(const int &aumento)
 {
 	nivelVisaoCalor += (nivelVisaoCalor < 5 && aumento >= 0)? aumento:0;
 }
-Superman::void aumentaSuperForca(const int &aumento)
+void Superman::aumentaSuperForca(const int &aumento)
 {
 	superForca += (superForca < forcaMaxima && aumento >= 0)? aumento:0;
 }
-Superman::void voar(const float &alturaVoo) const
+void Superman::voar(const float &alturaVoo) const
 {
 	if(alturaVoo > 0)
-		cout << "Voando coma altura: " << alturaVoo << endl;
+		cout << "Voando com a altura: " << alturaVoo << " m." << endl;
 	else cout << "Nao esta voando\n";
 }
 // Mostra todos os planetas
-Superman::void mostrarPlanetas()
+void Superman::mostrarPlanetas()
 {
 	for(int i = 0; i < 5; i++)
 	   cout << "Planeta " << (i+1) << endl;
 }
 // Imprime os planetas visitados pelo Superman
-Superman::::void imprimePlanetasVisitados()
+void Superman::imprimePlanetasVisitados()
 {
-	for(int i = 0; i < this->planetasVisitados.size; i++)
-		cout << this->planetasVisitados.at(i);
+	cout << "Planetas visitados:\n";
+	for(unsigned int i = 0; i < this->planetasVisitados.size(); i++)
+		cout << "Planeta " << this->planetasVisitados.at(i) << endl;
 }	  
 // Método usado para o Superman visitar um planeta
-Superman::void visitarPlaneta()
+void Superman::visitarPlaneta()
 {
 	string planeta;
 	cout << "Escolha qual planeta quer visitar:\n";
@@ -191,38 +194,38 @@ Superman::void visitarPlaneta()
 	atualizarPlanetasVisitados(planeta);
 }
 // Atualiza os planetas que o Superman já visitou 
-Supermna::void atualizarPlanetasVisitados(string planeta)
+void Superman::atualizarPlanetasVisitados(const string &planeta)
 {
 	this->planetasVisitados.push_back(planeta);
 }
 // Imprime dados do Superman
-Superman::Superman void imprime()
+void Superman::imprime()
 {
 	this->Hero::imprime();
-	cout << " Resistencia atual: " << this->resistenciaAtual;
-	cout << " Nivel da visaode calor: " << this->nivelVisaoCalor;
+	cout << "Resistencia atual: " << this->resistenciaAtual << endl;
+	cout << "Nivel da visaode calor: " << this->nivelVisaoCalor << endl;
 	if(visaoRaioX) cout << "Visao de raioX ativa\n";
-	cout << "SuperForca: " << this->superForca;
+	cout << "SuperForca: " << this->superForca << " quintilhoes de toneladas\n";
 	cout << "Itens de forca: " << endl;
 	for(int i = 0; i < 5; i++)
 		if(itemForca[i])
 			switch (i) {
 				case 0:
-					cout << "Aumenta a resistencia atual em 10\n";
+					cout << (i+1) << " Aumenta a resistencia atual em 10\n";
 					break;
 				case 1:
-					cout << "Aumenta a visao de calor em 1\n";
+					cout << (i+1) << " Aumenta a visao de calor em 1\n";
 					break;
 				case 2:
-					cout << "Aumenta a super forca em 50 quintilhões de toneladas\n";
+					cout << (i+1) << " Aumenta a super forca em 50 quintilhoes de toneladas\n";
 					break;
 				case 3:
-					cout << "Ativa a visao de raioX\n";
+					cout << (i+1) <<" Ativa a visao de raioX\n";
 					break;
 				case 4:
-					cout << "Desativa a kryptoniya\n";
+					cout << (i+1) << " Desativa a kryptoniya\n";
 					break;
 		}
 		imprimePlanetasVisitados();
-	
 }
+float Superman::getForcaMaxima(){ return forcaMaxima; }
