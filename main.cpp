@@ -18,7 +18,7 @@ int main (void)
 {
 	Character *personagem = new Superman("Criptonita","Charles",30);
 	Hero *heroi1 = new Superman("Criptonita","C.Kent",33);
-	Superman *superman1  = new Superman("Criptonita","Vinicius Sousa",18,1.80,28,07,1996,100,4,50);
+	Superman *superman1  = new Superman("Criptonita","Kalel",33,1.80,10,05,1981,100,4,50);
 	Superman *superman2 = new Superman(*superman1);
 	Hero *heroi2 = static_cast<Hero*>(superman1); // Upcasting
 	personagem->imprime();
@@ -41,7 +41,7 @@ int main (void)
 	delete heroi2;
 	delete superman1;
 	delete superman2;
-	Superman *superman1  = new Superman("Criptonita","Vinicius Sousa",18,1.80,28,07,1996,100,4,50);
+	Superman *superman1  = new Superman("Criptonita","Kalel",33,1.80,10,05,1981,100,4,50);
 	Superman *superman2 = new Superman("Criptonita","C. Kent",33);
 	Batman *batman1 = new Batman("Fraqueza Humana","B. Wayne",25);
 	GreenArrow *arqueiro1 = new GreenArrow("Fraqueza Humana","O. Queen",25);
