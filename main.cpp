@@ -35,7 +35,7 @@ int main (void)
 	cout << (*personagem);
 	cout << (*heroi);
 	cout << (*superman2);
-	cout << "Forca Maxima: " << Superman::getForcaMaxima();*/
+	cout << "Forca Maxima: " << Superman::getForcaMaxima();
 	delete personagem;
 	delete heroi1;
 	delete heroi2;
